@@ -1,4 +1,4 @@
-package main.java.com.codex.ui;
+package com.codex.ui;
 // ─────────────────────────────────────────────────────────────────────────────
 //  IMPORTS
 // ─────────────────────────────────────────────────────────────────────────────
@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+
+import com.codex.util.UITheme;
  
 // ─────────────────────────────────────────────────────────────────────────────
 //  CLASS DECLARATION
@@ -25,14 +27,7 @@ public class MainFrame extends JFrame {
     // ─────────────────────────────────────────────────────────────────────────
     //  ATTRIBUTES / FIELDS
     // ─────────────────────────────────────────────────────────────────────────
- 
-    private static final String APP_TITLE       = "Codex";
-    private static final int    WINDOW_WIDTH     = 1100;
-    private static final int    WINDOW_HEIGHT    = 700;
-    private static final int    MIN_WIDTH        = 800;
-    private static final int    MIN_HEIGHT       = 500;
-    private static final int    LEFT_PANEL_WIDTH = 240;
- 
+
     // Core UI panels
     private Toolbar     toolbar;
     private SectionTree sectionTree;
@@ -88,7 +83,7 @@ public class MainFrame extends JFrame {
         // --- Left panel: section tree only
         leftPanel.add(sectionTree, BorderLayout.CENTER);
         leftPanel.setMinimumSize(new Dimension(180, 0));
-        leftPanel.setPreferredSize(new Dimension(LEFT_PANEL_WIDTH, 0));
+        leftPanel.setPreferredSize(new Dimension(UITheme.LEFT_PANEL_WIDTH, 0));
  
         // --- Right panel: note editor only
         rightPanel.add(noteEditor, BorderLayout.CENTER);
@@ -96,7 +91,7 @@ public class MainFrame extends JFrame {
  
         // --- Split pane: left | right
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPanel, rightPanel);
-        splitPane.setDividerLocation(LEFT_PANEL_WIDTH);
+        splitPane.setDividerLocation(UITheme.LEFT_PANEL_WIDTH);
         splitPane.setDividerSize(1);
         splitPane.setContinuousLayout(true);
         splitPane.setBorder(null);
@@ -130,9 +125,9 @@ public class MainFrame extends JFrame {
     // ─────────────────────────────────────────────────────────────────────────
  
     private void applyWindowSettings() {
-        setTitle(APP_TITLE);
-        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        setMinimumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
+        setTitle(UITheme.APP_TITLE);
+        setSize(UITheme.WINDOW_WIDTH, UITheme.WINDOW_HEIGHT);
+        setMinimumSize(new Dimension(UITheme.MIN_WIDTH, UITheme.MIN_HEIGHT));
         setLocationRelativeTo(null);    // center on screen
         setVisible(true);
     }

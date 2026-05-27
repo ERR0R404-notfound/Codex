@@ -1,4 +1,4 @@
-package main.java.com.codex;
+package com.codex;
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  IMPORTS
@@ -7,7 +7,7 @@ package main.java.com.codex;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import main.java.com.codex.ui.MainFrame;
+import com.codex.ui.MainFrame;
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  CLASS DECLARATION

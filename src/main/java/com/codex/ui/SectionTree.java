@@ -1,5 +1,4 @@
-package main.java.com.codex.ui;
-// ─────────────────────────────────────────────────────────────────────────────
+package com.codex.ui;// ─────────────────────────────────────────────────────────────────────────────
 //  IMPORTS
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -25,6 +24,8 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
+import com.codex.util.UITheme;
+
 // ─────────────────────────────────────────────────────────────────────────────
 //  CLASS DECLARATION
 //  SectionTree — the left panel of Codex.
@@ -37,15 +38,6 @@ public class SectionTree extends JPanel {
     // ─────────────────────────────────────────────────────────────────────────
     //  ATTRIBUTES / FIELDS
     // ─────────────────────────────────────────────────────────────────────────
-
-    private static final Color  PANEL_BACKGROUND    = new Color(248, 248, 248);
-    private static final Color  TREE_BACKGROUND     = new Color(248, 248, 248);
-    private static final Color  SELECTION_COLOR     = new Color(225, 235, 255);
-    private static final Color  SELECTION_BORDER    = new Color(180, 210, 255);
-    private static final Color  TEXT_COLOR          = new Color(40, 40, 40);
-    private static final Color  SECTION_LABEL_COLOR = new Color(130, 130, 130);
-    private static final Font   TREE_FONT           = new Font("Segoe UI", Font.PLAIN, 13);
-    private static final Font   SECTION_FONT        = new Font("Segoe UI", Font.BOLD, 11);
 
     // Tree components
     private JTree               tree;
@@ -73,7 +65,6 @@ public class SectionTree extends JPanel {
         initComponents();
         initLayout();
         initListeners();
-        loadSampleData();
     }
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -83,8 +74,8 @@ public class SectionTree extends JPanel {
     private void initComponents() {
         // --- Header label
         lblHeader = new JLabel("SECTIONS");
-        lblHeader.setFont(SECTION_FONT);
-        lblHeader.setForeground(SECTION_LABEL_COLOR);
+        lblHeader.setFont(UITheme.SECTION_FONT);
+        lblHeader.setForeground(UITheme.SECTION_LABEL_COLOR);
         lblHeader.setBorder(BorderFactory.createEmptyBorder(14, 14, 6, 14));
 
         // --- Tree model with invisible root
@@ -95,8 +86,8 @@ public class SectionTree extends JPanel {
         tree = new JTree(treeModel);
         tree.setRootVisible(false);
         tree.setShowsRootHandles(true);
-        tree.setBackground(TREE_BACKGROUND);
-        tree.setFont(TREE_FONT);
+        tree.setBackground(UITheme.TREE_BACKGROUND);
+        tree.setFont(UITheme.TREE_FONT);
         tree.setRowHeight(28);
         tree.setBorder(BorderFactory.createEmptyBorder(0, 6, 0, 6));
         tree.setCellRenderer(new CodexTreeCellRenderer());
@@ -104,8 +95,8 @@ public class SectionTree extends JPanel {
         // --- Scroll pane wrapping the tree
         scrollPane = new JScrollPane(tree);
         scrollPane.setBorder(null);
-        scrollPane.setBackground(TREE_BACKGROUND);
-        scrollPane.getViewport().setBackground(TREE_BACKGROUND);
+        scrollPane.setBackground(UITheme.TREE_BACKGROUND);
+        scrollPane.getViewport().setBackground(UITheme.TREE_BACKGROUND);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         // --- Context menu
@@ -131,7 +122,7 @@ public class SectionTree extends JPanel {
 
     private void initLayout() {
         setLayout(new BorderLayout());
-        setBackground(PANEL_BACKGROUND);
+        setBackground(UITheme.PANEL_BACKGROUND);
         setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(220, 220, 220)));
 
         add(lblHeader,  BorderLayout.NORTH);
@@ -168,38 +159,6 @@ public class SectionTree extends JPanel {
         menuAddNote.addActionListener(e -> onAddNote());
         menuRename.addActionListener(e -> onRename());
         menuDelete.addActionListener(e -> onDelete());
-    }
-
-    // ─────────────────────────────────────────────────────────────────────────
-    //  SAMPLE DATA
-    //  Populates the tree with placeholder data for UI testing.
-    //  Replace with DB-loaded data once DatabaseManager is ready.
-    // ─────────────────────────────────────────────────────────────────────────
-
-    private void loadSampleData() {
-        DefaultMutableTreeNode school   = new DefaultMutableTreeNode("📁  School");
-        DefaultMutableTreeNode its132p  = new DefaultMutableTreeNode("📁  ITS132P - Data Warehousing");
-        DefaultMutableTreeNode asm      = new DefaultMutableTreeNode("📁  Assembly Language");
-        DefaultMutableTreeNode personal = new DefaultMutableTreeNode("📁  Personal");
-
-        its132p.add(new DefaultMutableTreeNode("📄  Lab 1.1 Notes"));
-        its132p.add(new DefaultMutableTreeNode("📄  ETL Concepts"));
-        asm.add(new DefaultMutableTreeNode("📄  Win32 GUI Notes"));
-        asm.add(new DefaultMutableTreeNode("📄  MASM Macros"));
-        personal.add(new DefaultMutableTreeNode("📄  Ideas"));
-
-        school.add(its132p);
-        school.add(asm);
-
-        rootNode.add(school);
-        rootNode.add(personal);
-
-        treeModel.reload();
-
-        // Expand all nodes by default
-        for (int i = 0; i < tree.getRowCount(); i++) {
-            tree.expandRow(i);
-        }
     }
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -318,14 +277,14 @@ public class SectionTree extends JPanel {
             super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
 
             setFont(new Font("Segoe UI", Font.PLAIN, 13));
-            setForeground(TEXT_COLOR);
+            setForeground(UITheme.TEXT_COLOR);
             setBorderSelectionColor(null);
             setLeafIcon(null);
             setOpenIcon(null);
             setClosedIcon(null);
 
             if (selected) {
-                setBackground(SELECTION_COLOR);
+                setBackground(UITheme.SELECTION_COLOR);
                 setOpaque(true);
             } else {
                 setOpaque(false);
