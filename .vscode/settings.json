@@ -2,5 +2,6 @@
     "java.project.sourcePaths": ["src/main/java"],
     "java.project.outputPath": "bin",
     "java.debug.settings.onBuildFailureProceed": true,
-    "java.jdt.ls.java.home": "C:\\Program Files\\Java\\jdk-26.0.1"
+    "java.jdt.ls.java.home": "C:\\Program Files\\Java\\jdk-26.0.1",
+    "java.compile.nullAnalysis.mode": "automatic"
 }
