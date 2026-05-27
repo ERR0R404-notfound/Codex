@@ -4,11 +4,20 @@ package main.java.com.codex.ui;
 //  IMPORTS
 // ─────────────────────────────────────────────────────────────────────────────
 
-import javax.swing.*;
-import javax.swing.border.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  CLASS DECLARATION

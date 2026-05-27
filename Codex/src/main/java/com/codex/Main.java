@@ -1,29 +1,30 @@
 package main.java.com.codex;
 
-
 // ─────────────────────────────────────────────────────────────────────────────
 //  IMPORTS
 // ─────────────────────────────────────────────────────────────────────────────
- 
+
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+
 import main.java.com.codex.ui.MainFrame;
-import javax.swing.*;
- 
+
 // ─────────────────────────────────────────────────────────────────────────────
 //  CLASS DECLARATION
 //  Main — entry point for the Codex application.
 //  Bootstraps the Swing UI on the Event Dispatch Thread (EDT).
 // ─────────────────────────────────────────────────────────────────────────────
- 
+
 public class Main {
- 
+
     // ─────────────────────────────────────────────────────────────────────────
     //  MAIN METHOD
     // ─────────────────────────────────────────────────────────────────────────
- 
+
     public static void main(String[] args) {
         // Apply system look and feel before launching the window
         applyLookAndFeel();
- 
+
         // Launch the main window on the Swing Event Dispatch Thread
         SwingUtilities.invokeLater(() -> {
             MainFrame frame = new MainFrame();
@@ -31,11 +32,11 @@ public class Main {
             frame.getNoteEditor().linkStatusBar(frame.getStatusBar());
         });
     }
- 
+
     // ─────────────────────────────────────────────────────────────────────────
     //  HELPER METHODS
     // ─────────────────────────────────────────────────────────────────────────
- 
+
     /**
      * Applies the system look and feel.
      * FlatLaf will replace this once the dependency is available via Maven.
@@ -49,5 +50,5 @@ public class Main {
             System.err.println("[Main] Failed to apply look and feel: " + e.getMessage());
         }
     }
- 
+
 }

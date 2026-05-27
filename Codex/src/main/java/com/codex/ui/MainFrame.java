@@ -1,12 +1,17 @@
 package main.java.com.codex.ui;
-
 // ─────────────────────────────────────────────────────────────────────────────
 //  IMPORTS
 // ─────────────────────────────────────────────────────────────────────────────
  
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
  
 // ─────────────────────────────────────────────────────────────────────────────
 //  CLASS DECLARATION
@@ -26,7 +31,7 @@ public class MainFrame extends JFrame {
     private static final int    WINDOW_HEIGHT    = 700;
     private static final int    MIN_WIDTH        = 800;
     private static final int    MIN_HEIGHT       = 500;
-    private static final int    LEFT_PANEL_WIDTH = 250;
+    private static final int    LEFT_PANEL_WIDTH = 240;
  
     // Core UI panels
     private Toolbar     toolbar;
@@ -82,7 +87,7 @@ public class MainFrame extends JFrame {
     private void initLayout() {
         // --- Left panel: section tree only
         leftPanel.add(sectionTree, BorderLayout.CENTER);
-        leftPanel.setMinimumSize(new Dimension(200, 0));
+        leftPanel.setMinimumSize(new Dimension(180, 0));
         leftPanel.setPreferredSize(new Dimension(LEFT_PANEL_WIDTH, 0));
  
         // --- Right panel: note editor only

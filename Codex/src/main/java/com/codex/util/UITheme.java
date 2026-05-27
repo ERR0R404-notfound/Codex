@@ -33,4 +33,10 @@ public class UITheme {
     public static final int   TOOLBAR_HEIGHT     = 48;
     public static final int   STATUSBAR_HEIGHT   = 28;
     public static final int   SIDEBAR_WIDTH      = 240;
+    public static final int   WINDOW_WIDTH       = 1100;
+    public static final int   WINDOW_HEIGHT      = 700;
+    public static final int   MIN_WIDTH          = 800;
+    public static final int   MIN_HEIGHT         = 500;
+    public static final int   LEFT_PANEL_WIDTH   = 250;
+    public static final int   DIVIDER_THICKNESS  = 1;
 }
