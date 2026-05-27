@@ -43,6 +43,13 @@
             <version>8.3.0</version>
         </dependency>
 
+        <!-- HikariCP — lightweight connection pooling for MySQL -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>5.1.0</version>
+        </dependency>
+
         <!-- Apache PDFBox — reading and rendering PDF files -->
         <dependency>
             <groupId>org.apache.pdfbox</groupId>

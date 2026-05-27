@@ -8,6 +8,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import com.codex.ui.MainFrame;
+import com.codex.db.DatabaseManager;
+import com.codex.db.DatabaseInit;
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  CLASS DECLARATION
@@ -22,6 +24,9 @@ public class Main {
     // ─────────────────────────────────────────────────────────────────────────
 
     public static void main(String[] args) {
+        // Initialize database connection pool and schema
+        DatabaseManager.getInstance();
+
         // Apply system look and feel before launching the window
         applyLookAndFeel();
 

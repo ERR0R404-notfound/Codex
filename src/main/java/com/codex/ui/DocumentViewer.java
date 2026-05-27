@@ -20,6 +20,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
+import com.codex.util.UITheme;
+
 // ─────────────────────────────────────────────────────────────────────────────
 //  CLASS DECLARATION
 //  DocumentViewer — a panel that previews PDF and DOCX files.
@@ -32,12 +34,6 @@ public class DocumentViewer extends JPanel {
     // ─────────────────────────────────────────────────────────────────────────
     //  ATTRIBUTES / FIELDS
     // ─────────────────────────────────────────────────────────────────────────
-
-    private static final Color PANEL_BACKGROUND = new Color(230, 230, 230);
-    private static final Color CARD_BACKGROUND  = Color.WHITE;
-    private static final Color TEXT_COLOR       = new Color(100, 100, 100);
-    private static final Font  LABEL_FONT       = new Font("Segoe UI", Font.PLAIN, 14);
-    private static final Font  FILENAME_FONT    = new Font("Segoe UI", Font.BOLD, 14);
 
     // Toolbar
     private JPanel      viewerToolbar;
@@ -84,15 +80,15 @@ public class DocumentViewer extends JPanel {
         ));
 
         lblFileName  = new JLabel("No document open");
-        lblFileName.setFont(FILENAME_FONT);
+        lblFileName.setFont(UITheme.FILENAME_FONT);
         lblFileName.setForeground(new Color(50, 50, 50));
 
         // Pagination controls
         btnPrevPage  = createViewerButton("◀");
         btnNextPage  = createViewerButton("▶");
         lblPageInfo  = new JLabel("—");
-        lblPageInfo.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        lblPageInfo.setForeground(TEXT_COLOR);
+        lblPageInfo.setFont(UITheme.FILTER_FONT);
+        lblPageInfo.setForeground(UITheme.TEXT_COLOR);
 
         JPanel paginationPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 6, 0));
         paginationPanel.setOpaque(false);
@@ -114,18 +110,18 @@ public class DocumentViewer extends JPanel {
 
         // --- Document canvas (renders document pages)
         documentCanvas = new JPanel();
-        documentCanvas.setBackground(PANEL_BACKGROUND);
+        documentCanvas.setBackground(UITheme.PANEL_BACKGROUND);
         documentCanvas.setLayout(new BoxLayout(documentCanvas, BoxLayout.Y_AXIS));
 
         canvasScroll = new JScrollPane(documentCanvas);
         canvasScroll.setBorder(null);
-        canvasScroll.setBackground(PANEL_BACKGROUND);
-        canvasScroll.getViewport().setBackground(PANEL_BACKGROUND);
+        canvasScroll.setBackground(UITheme.PANEL_BACKGROUND);
+        canvasScroll.getViewport().setBackground(UITheme.PANEL_BACKGROUND);
 
         // --- Placeholder label
         lblPlaceholder = new JLabel("No document open", SwingConstants.CENTER);
-        lblPlaceholder.setFont(LABEL_FONT);
-        lblPlaceholder.setForeground(TEXT_COLOR);
+        lblPlaceholder.setFont(UITheme.LABEL_FONT);
+        lblPlaceholder.setForeground(UITheme.TEXT_COLOR);
     }
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -134,7 +130,7 @@ public class DocumentViewer extends JPanel {
 
     private void initLayout() {
         setLayout(new BorderLayout());
-        setBackground(PANEL_BACKGROUND);
+        setBackground(UITheme.PANEL_BACKGROUND);
 
         add(viewerToolbar, BorderLayout.NORTH);
         add(canvasScroll,  BorderLayout.CENTER);
@@ -251,9 +247,9 @@ public class DocumentViewer extends JPanel {
 
         // Placeholder card shown until real rendering is wired in
         JPanel placeholderCard = new JPanel(new BorderLayout());
-        placeholderCard.setBackground(CARD_BACKGROUND);
+        placeholderCard.setBackground(UITheme.CARD_BACKGROUND);
         placeholderCard.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(220, 220, 220)),
+            BorderFactory.createLineBorder(UITheme.DIVIDER_COLOR),
             BorderFactory.createEmptyBorder(40, 40, 40, 40)
         ));
         placeholderCard.setMaximumSize(new Dimension(700, 900));
@@ -265,7 +261,7 @@ public class DocumentViewer extends JPanel {
             "Wire PDFHandler / DocxHandler to complete.</span></center></html>",
             SwingConstants.CENTER
         );
-        cardLabel.setFont(LABEL_FONT);
+        cardLabel.setFont(UITheme.LABEL_FONT);
         placeholderCard.add(cardLabel, BorderLayout.CENTER);
 
         documentCanvas.add(Box.createVerticalStrut(24));

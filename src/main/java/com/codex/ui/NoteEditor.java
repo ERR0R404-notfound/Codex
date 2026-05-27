@@ -7,7 +7,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -22,6 +21,8 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import com.codex.util.UITheme;
+
 // ─────────────────────────────────────────────────────────────────────────────
 //  CLASS DECLARATION
 //  NoteEditor — the right panel of Codex.
@@ -33,24 +34,7 @@ public class NoteEditor extends JPanel {
 
     // ─────────────────────────────────────────────────────────────────────────
     //  ATTRIBUTES / FIELDS
-    // ─────────────────────────────────────────────────────────────────────────
-
-    private static final Color  PANEL_BACKGROUND   = Color.WHITE;
-    private static final Color  FILTER_BAR_BG      = new Color(250, 250, 250);
-    private static final Color  ACTIVE_TAB_COLOR   = new Color(60, 60, 60);
-    private static final Color  INACTIVE_TAB_COLOR = new Color(160, 160, 160);
-    private static final Color  ACTIVE_TAB_BORDER  = new Color(60, 60, 60);
-    private static final Color  TITLE_COLOR        = new Color(30, 30, 30);
-    private static final Color  EDITOR_COLOR       = new Color(50, 50, 50);
-    private static final Color  DIVIDER_COLOR      = new Color(220, 220, 220);
-    private static final Color  PLACEHOLDER_COLOR  = new Color(190, 190, 190);
-
-    private static final Font   FILTER_FONT        = new Font("Segoe UI", Font.PLAIN, 13);
-    private static final Font   TITLE_FONT         = new Font("Segoe UI", Font.BOLD, 22);
-    private static final Font   EDITOR_FONT        = new Font("Segoe UI", Font.PLAIN, 14);
-
-    private static final String TITLE_PLACEHOLDER  = "Note title...";
-    private static final String EDITOR_PLACEHOLDER = "Start writing your note here...";
+    // ────────────────────────────────────────────────────────────────────────
 
     // Filter tab labels
     private static final String[] FILTER_LABELS = {"All", "Pinned", "Tagged", "Recent"};
@@ -90,9 +74,9 @@ public class NoteEditor extends JPanel {
     private void initComponents() {
         // --- Filter tab bar
         filterBar  = new JPanel(new FlowLayout(FlowLayout.LEFT, 4, 0));
-        filterBar.setBackground(FILTER_BAR_BG);
+        filterBar.setBackground(UITheme.FILTER_BAR_BG);
         filterBar.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createMatteBorder(0, 0, 1, 0, DIVIDER_COLOR),
+            BorderFactory.createMatteBorder(0, 0, 1, 0, UITheme.DIVIDER_COLOR),
             BorderFactory.createEmptyBorder(10, 16, 0, 16)
         ));
 
@@ -105,17 +89,17 @@ public class NoteEditor extends JPanel {
         setActiveTab(0);
 
         // --- Note title field
-        titleField = new JTextField(TITLE_PLACEHOLDER);
-        titleField.setFont(TITLE_FONT);
-        titleField.setForeground(PLACEHOLDER_COLOR);
+        titleField = new JTextField(UITheme.TITLE_PLACEHOLDER);
+        titleField.setFont(UITheme.FONT_TITLE);
+        titleField.setForeground(UITheme.PLACEHOLDER_COLOR);
         titleField.setBorder(BorderFactory.createEmptyBorder(24, 32, 8, 32));
-        titleField.setBackground(PANEL_BACKGROUND);
+        titleField.setBackground(UITheme.PANEL_BACKGROUND);
 
         // --- Note body editor
-        editorArea = new JTextArea(EDITOR_PLACEHOLDER);
-        editorArea.setFont(EDITOR_FONT);
-        editorArea.setForeground(PLACEHOLDER_COLOR);
-        editorArea.setBackground(PANEL_BACKGROUND);
+        editorArea = new JTextArea(UITheme.EDITOR_PLACEHOLDER);
+        editorArea.setFont(UITheme.EDITOR_FONT);
+        editorArea.setForeground(UITheme.PLACEHOLDER_COLOR);
+        editorArea.setBackground(UITheme.PANEL_BACKGROUND);
         editorArea.setLineWrap(true);
         editorArea.setWrapStyleWord(true);
         editorArea.setBorder(BorderFactory.createEmptyBorder(8, 32, 32, 32));
@@ -124,14 +108,14 @@ public class NoteEditor extends JPanel {
         // --- Scroll pane for editor
         editorScroll = new JScrollPane(editorArea);
         editorScroll.setBorder(null);
-        editorScroll.setBackground(PANEL_BACKGROUND);
-        editorScroll.getViewport().setBackground(PANEL_BACKGROUND);
+        editorScroll.setBackground(UITheme.PANEL_BACKGROUND);
+        editorScroll.getViewport().setBackground(UITheme.PANEL_BACKGROUND);
         editorScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         editorScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         // --- Content panel wrapping title + editor
         contentPanel = new JPanel(new BorderLayout());
-        contentPanel.setBackground(PANEL_BACKGROUND);
+        contentPanel.setBackground(UITheme.PANEL_BACKGROUND);
         contentPanel.add(titleField,  BorderLayout.NORTH);
         contentPanel.add(editorScroll, BorderLayout.CENTER);
     }
@@ -150,7 +134,7 @@ public class NoteEditor extends JPanel {
 
     private void initLayout() {
         setLayout(new BorderLayout());
-        setBackground(PANEL_BACKGROUND);
+        setBackground(UITheme.PANEL_BACKGROUND);
 
         add(filterBar,    BorderLayout.NORTH);
         add(contentPanel, BorderLayout.CENTER);
@@ -165,17 +149,17 @@ public class NoteEditor extends JPanel {
         titleField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (titleField.getText().equals(TITLE_PLACEHOLDER)) {
+                if (titleField.getText().equals(UITheme.TITLE_PLACEHOLDER)) {
                     titleField.setText("");
-                    titleField.setForeground(TITLE_COLOR);
+                    titleField.setForeground(UITheme.TITLE_COLOR);
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 if (titleField.getText().isBlank()) {
-                    titleField.setText(TITLE_PLACEHOLDER);
-                    titleField.setForeground(PLACEHOLDER_COLOR);
+                    titleField.setText(UITheme.TITLE_PLACEHOLDER);
+                    titleField.setForeground(UITheme.PLACEHOLDER_COLOR);
                 }
             }
         });
@@ -184,17 +168,17 @@ public class NoteEditor extends JPanel {
         editorArea.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (editorArea.getText().equals(EDITOR_PLACEHOLDER)) {
+                if (editorArea.getText().equals(UITheme.EDITOR_PLACEHOLDER)) {
                     editorArea.setText("");
-                    editorArea.setForeground(EDITOR_COLOR);
+                    editorArea.setForeground(UITheme.EDITOR_COLOR);
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 if (editorArea.getText().isBlank()) {
-                    editorArea.setText(EDITOR_PLACEHOLDER);
-                    editorArea.setForeground(PLACEHOLDER_COLOR);
+                    editorArea.setText(UITheme.EDITOR_PLACEHOLDER);
+                    editorArea.setForeground(UITheme.PLACEHOLDER_COLOR);
                 }
             }
         });
@@ -216,7 +200,7 @@ public class NoteEditor extends JPanel {
      */
     private JButton createFilterTab(String label, int index) {
         JButton tab = new JButton(label);
-        tab.setFont(FILTER_FONT);
+        tab.setFont(UITheme.FILTER_FONT);
         tab.setFocusPainted(false);
         tab.setBorderPainted(false);
         tab.setContentAreaFilled(false);
@@ -236,10 +220,10 @@ public class NoteEditor extends JPanel {
 
         for (int i = 0; i < filterTabs.length; i++) {
             if (i == index) {
-                filterTabs[i].setForeground(ACTIVE_TAB_COLOR);
-                filterTabs[i].setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, ACTIVE_TAB_BORDER));
+                filterTabs[i].setForeground(UITheme.ACTIVE_TAB_COLOR);
+                filterTabs[i].setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, UITheme.ACTIVE_TAB_BORDER));
             } else {
-                filterTabs[i].setForeground(INACTIVE_TAB_COLOR);
+                filterTabs[i].setForeground(UITheme.INACTIVE_TAB_COLOR);
                 filterTabs[i].setBorder(BorderFactory.createEmptyBorder(0, 0, 2, 0));
             }
         }
@@ -263,7 +247,7 @@ public class NoteEditor extends JPanel {
         if (statusBar == null) return;
 
         String text = editorArea.getText();
-        if (text.equals(EDITOR_PLACEHOLDER) || text.isBlank()) {
+        if (text.equals(UITheme.EDITOR_PLACEHOLDER) || text.isBlank()) {
             statusBar.setWordCount(0, 0);
             return;
         }
@@ -283,9 +267,9 @@ public class NoteEditor extends JPanel {
      */
     public void loadNote(String title, String content) {
         titleField.setText(title);
-        titleField.setForeground(TITLE_COLOR);
+        titleField.setForeground(UITheme.TITLE_COLOR);
         editorArea.setText(content);
-        editorArea.setForeground(EDITOR_COLOR);
+        editorArea.setForeground(UITheme.EDITOR_COLOR);
         editorArea.setCaretPosition(0);
     }
 
@@ -293,10 +277,10 @@ public class NoteEditor extends JPanel {
      * Clears the editor back to placeholder state.
      */
     public void clearEditor() {
-        titleField.setText(TITLE_PLACEHOLDER);
-        titleField.setForeground(PLACEHOLDER_COLOR);
-        editorArea.setText(EDITOR_PLACEHOLDER);
-        editorArea.setForeground(PLACEHOLDER_COLOR);
+        titleField.setText(UITheme.TITLE_PLACEHOLDER);
+        titleField.setForeground(UITheme.PLACEHOLDER_COLOR);
+        editorArea.setText(UITheme.EDITOR_PLACEHOLDER);
+        editorArea.setForeground(UITheme.PLACEHOLDER_COLOR);
     }
 
     /**
@@ -304,7 +288,7 @@ public class NoteEditor extends JPanel {
      */
     public String getNoteTitle() {
         String text = titleField.getText();
-        return text.equals(TITLE_PLACEHOLDER) ? "" : text;
+        return text.equals(UITheme.TITLE_PLACEHOLDER) ? "" : text;
     }
 
     /**
@@ -312,7 +296,7 @@ public class NoteEditor extends JPanel {
      */
     public String getNoteContent() {
         String text = editorArea.getText();
-        return text.equals(EDITOR_PLACEHOLDER) ? "" : text;
+        return text.equals(UITheme.EDITOR_PLACEHOLDER) ? "" : text;
     }
 
     /**

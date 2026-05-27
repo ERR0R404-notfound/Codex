@@ -3,9 +3,7 @@ package com.codex.ui;
 //  IMPORTS
 // ─────────────────────────────────────────────────────────────────────────────
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -18,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
+import com.codex.util.UITheme;
+
 // ─────────────────────────────────────────────────────────────────────────────
 //  CLASS DECLARATION
 //  StatusBar — the bottom bar of the Codex application.
@@ -29,16 +29,6 @@ public class StatusBar extends JPanel {
     // ─────────────────────────────────────────────────────────────────────────
     //  ATTRIBUTES / FIELDS
     // ─────────────────────────────────────────────────────────────────────────
-
-    private static final int    STATUS_HEIGHT     = 28;
-    private static final Color  BAR_BACKGROUND    = new Color(245, 245, 245);
-    private static final Color  TEXT_COLOR        = new Color(120, 120, 120);
-    private static final Color  SEPARATOR_COLOR   = new Color(210, 210, 210);
-    private static final Color  SYNCED_COLOR      = new Color(80, 180, 100);
-    private static final Color  UNSYNCED_COLOR    = new Color(200, 100, 100);
-    private static final Color  DB_ONLINE_COLOR   = new Color(80, 180, 100);
-    private static final Color  DB_OFFLINE_COLOR  = new Color(200, 100, 100);
-    private static final Font   STATUS_FONT       = new Font("Segoe UI", Font.PLAIN, 12);
 
     private static final DateTimeFormatter TIME_FORMAT =
         DateTimeFormatter.ofPattern("MMM d, yyyy  h:mm a");
@@ -71,8 +61,8 @@ public class StatusBar extends JPanel {
         lblSyncStatus  = createStatusLabel("● Local only", SwingConstants.CENTER);
         lblDbStatus    = createStatusLabel("● DB Offline", SwingConstants.RIGHT);
 
-        lblSyncStatus.setForeground(UNSYNCED_COLOR);
-        lblDbStatus.setForeground(DB_OFFLINE_COLOR);
+        lblSyncStatus.setForeground(UITheme.UNSYNCED_COLOR);
+        lblDbStatus.setForeground(UITheme.DB_OFFLINE_COLOR);
     }
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -84,9 +74,9 @@ public class StatusBar extends JPanel {
 
     private void initLayout() {
         setLayout(new GridBagLayout());
-        setPreferredSize(new Dimension(0, STATUS_HEIGHT));
-        setBackground(BAR_BACKGROUND);
-        setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, SEPARATOR_COLOR));
+        setPreferredSize(new Dimension(0, UITheme.STATUS_HEIGHT));
+        setBackground(UITheme.BAR_BACKGROUND);
+        setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, UITheme.SEPARATOR_COLOR));
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets  = new Insets(0, 12, 0, 12);
@@ -149,8 +139,8 @@ public class StatusBar extends JPanel {
      */
     private JLabel createStatusLabel(String text, int alignment) {
         JLabel label = new JLabel(text, alignment);
-        label.setFont(STATUS_FONT);
-        label.setForeground(TEXT_COLOR);
+        label.setFont(UITheme.STATUS_FONT);
+        label.setForeground(UITheme.TEXT_COLOR);
         return label;
     }
 
@@ -159,8 +149,8 @@ public class StatusBar extends JPanel {
      */
     private JSeparator createSeparator() {
         JSeparator sep = new JSeparator(JSeparator.VERTICAL);
-        sep.setPreferredSize(new Dimension(1, STATUS_HEIGHT - 12));
-        sep.setForeground(SEPARATOR_COLOR);
+        sep.setPreferredSize(new Dimension(1, UITheme.STATUS_HEIGHT - 12));
+        sep.setForeground(UITheme.SEPARATOR_COLOR);
         return sep;
     }
 
@@ -215,10 +205,10 @@ public class StatusBar extends JPanel {
     public void setSyncStatus(boolean synced) {
         if (synced) {
             lblSyncStatus.setText("● Synced");
-            lblSyncStatus.setForeground(SYNCED_COLOR);
+            lblSyncStatus.setForeground(UITheme.SYNCED_COLOR);
         } else {
             lblSyncStatus.setText("● Local only");
-            lblSyncStatus.setForeground(UNSYNCED_COLOR);
+            lblSyncStatus.setForeground(UITheme.UNSYNCED_COLOR);
         }
     }
 
@@ -230,10 +220,10 @@ public class StatusBar extends JPanel {
     public void setDbStatus(boolean connected) {
         if (connected) {
             lblDbStatus.setText("● DB Connected");
-            lblDbStatus.setForeground(DB_ONLINE_COLOR);
+            lblDbStatus.setForeground(UITheme.DB_ONLINE_COLOR);
         } else {
             lblDbStatus.setText("● DB Offline");
-            lblDbStatus.setForeground(DB_OFFLINE_COLOR);
+            lblDbStatus.setForeground(UITheme.DB_OFFLINE_COLOR);
         }
     }
 
